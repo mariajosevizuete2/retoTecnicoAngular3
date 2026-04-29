@@ -1,0 +1,56 @@
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div class="container my-4 bg-white p-4">
+  <form [formGroup]="productForm" (ngSubmit)="submit()">
+    <h2 class="text-center mb-5">Formulario de Registro</h2>
+    <div class="row">
+      <div class="col-6 mb-3">
+        <label class="form-label">ID</label>
+        <input type="text" class="form-control" formControlName="id">
+        <small class="text-danger" *ngIf="hasError('id')">{{ showMessage(getControl('id')) }}</small>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="name">
+        <small class="text-danger" *ngIf="hasError('name')">{{ showMessage(getControl('name')) }}</small>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">Descripción</label>
+        <input type="text" class="form-control" formControlName="description">
+        <small class="text-danger" *ngIf="hasError('description')">{{ showMessage(getControl('description')) }}</small>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">Logo</label>
+        <input type="text" class="form-control" formControlName="logo">
+        <small class="text-danger" *ngIf="hasError('logo')">{{ showMessage(getControl('logo')) }}</small>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">Fecha de Liberación</label>
+        <input type="date" class="form-control" formControlName="date_release">
+        <small class="text-danger" *ngIf="hasError('date_release')">{{ showMessage(getControl('date_release'))
+          }}</small>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">Fecha de Revisión</label>
+        <input type="date" class="form-control" formControlName="date_revision">
+        <small class="text-danger" *ngIf="hasError('date_revision')">{{ showMessage(getControl('date_revision'))
+          }}</small>
+      </div>
+    </div>
+
+    <div class="row my-5">
+      <div class="col-6">
+        <button class="btn btn-secondary" (click)="resetForm()">
+          Reiniciar
+        </button>
+      </div>
+      <div class="text-end col-6">
+        <button class="btn btn-primary" type="submit" [disabled]="productForm.invalid">
+          Enviar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

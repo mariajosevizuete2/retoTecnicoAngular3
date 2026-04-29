@@ -1,0 +1,15 @@
+<div class="custom-backdrop" *ngIf="show">
+  <div class="custom-modal text-center p-3 bg-white rounded">
+    <p class="mb-2">{{ message }}</p>
+
+    <div class="d-flex justify-content-center gap-3 mt-5">
+      <button class="btn btn-secondary" (click)="onCancel()">
+        {{ cancelText }}
+      </button>
+
+      <button class="btn btn-primary" (click)="onConfirm()">
+        {{ confirmText }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<app-confirmation [show]="showDeleteModal"  [message]="getDeleteMessage()" confirmText="Eliminar"
+  cancelText="Cancelar" (confirm)="confirmDelete()" (cancel)="cancelDelete()">
+</app-confirmation>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+
+<div class="container">
+
+  <div class="row  my-4">
+    <div class="col-6">
+      <input #searchInput type="text" placeholder="Buscar…" (input)="onSearch(searchInput.value)"
+        class="table-search" />
+    </div>
+
+    <div class="col-6 d-flex justify-content-end">
+      <button class="btn btn-primary" (click)="addProduct()">
+        Agregar
+      </button>
+    </div>
+  </div>
+
+
+  <div class="table-responsive">
+    <table class="table-products  bg-white p-4">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.label }}
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="(filteredData$ | async)?.length === 0">
+          <td [attr.colspan]="columns.length" class="empty">
+            No se encontraron resultados
+          </td>
+        </tr>
+
+        <tr *ngFor="let row of filteredData$ | async; trackBy: trackById">
+
+          <td *ngFor="let col of columns">
+            <ng-container [ngSwitch]="col.type">
+
+              <img *ngSwitchCase="'image'" [src]="getValue(row, col.key)" alt="Logo" class="product-logo" />
+
+              <span *ngSwitchCase="'date'">
+                {{ getDateValue(row, col.key) | date:'shortDate' }}
+              </span>
+
+              <span *ngSwitchDefault>
+                {{ getValue(row, col.key) }}
+              </span>
+
+            </ng-container>
+          </td>
+
+          <!-- Acciones -->
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"> ⋮</button>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button class="dropdown-item" (click)="updateProduct(row)">
+                    Editar
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item text-danger" (click)="openDeleteModal(row)">
+                    Eliminar
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row my-5 align-items-center">
+      <div class="col-12 col-md-6 mb-2 mb-md-0">
+        {{ (filteredData$ | async)?.length }} Resultados
+      </div>
+
+      <div class="col-12 col-md-6 d-flex justify-content-md-end">
+        <select class="form-select w-auto" (change)="onChangeSelect($event)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
