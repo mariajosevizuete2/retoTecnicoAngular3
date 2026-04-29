@@ -4,7 +4,6 @@
 
 ```bash
 git clone https://github.com/mariajosevizuete2/retoTecnicoAngular3
-cd reto2TecnicoAngular
 ```
 
 ---
@@ -57,12 +56,12 @@ Requisitos del entorno
 
 El proyecto fue desarrollado con las siguientes versiones:
 
-Angular CLI: 18.2.21
-Angular: 18.2.x
-Node.js: 18.19.0
-npm: 10.2.3
-RxJS: 7.8.2
-TypeScript: 5.5.4
+- Angular CLI: 18.2.21
+- Angular: 18.2.x
+- Node.js: 18.19.0
+- npm: 10.2.3
+- RxJS: 7.8.2
+- TypeScript: 5.5.4
 
 ```bash
 npm install -g @angular/cli
